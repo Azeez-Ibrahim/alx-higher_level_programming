@@ -4,4 +4,4 @@ if __name__ == "__main__":
     listmodule = dir(hidden_4)
     for i in listmodule:
         if listmodule[i][0:2] != '__':
-            print('{}'.format(i))
+            print('{}'.format(listmodule[i]))
