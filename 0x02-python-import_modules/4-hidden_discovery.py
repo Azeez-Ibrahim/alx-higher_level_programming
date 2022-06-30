@@ -4,5 +4,5 @@ if __name__ == "__main__":
 
     listmodule = dir()
     for i in listmodule:
-        # if listmodule[i][0:2] != "__":
-        print("{}".format(listmodule[i]))
+        if listmodule[i][0:2] != "__":
+            print("{}".format(listmodule[i]))
