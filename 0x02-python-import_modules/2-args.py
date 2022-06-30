@@ -4,7 +4,7 @@ if __name__ == "__main__":
 
     num = len(sys.argv) - 1
     if num == 0:
-        print("{} argument:".format(num))
+        print("{} argument.".format(num))
     elif num == 1:
         print("{} argument:".format(num))
     else:
