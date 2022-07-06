@@ -1,5 +1,11 @@
 #!/usr/bin/python3
 def best_score(a_dictionary):
-    if not a_dictionary:
+    if a_dictionary is None:
         return None
-    return max(a_dictionary)
+    elif a_dictionary == 0:
+        return None
+    keyList = list(a_dictionary.keys())
+    valList = list(a_dictionary.values())
+    maxVal = max(valList)
+    index = valList.index(maxVal)
+    return keyList[index]
