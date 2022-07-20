@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """No module added"""
 
+
 class Node:
     """Node of a singly linked list.
     Private instance attribute: data:
@@ -43,7 +44,7 @@ class Node:
 
 
 class SinglyLinkedList:
-    """ Singly linked list.
+    """Singly linked list.
     Private instance attribute: head.
     Simple instantiation.
     Public instance method: def sorted_insert(self, value).
@@ -59,7 +60,7 @@ class SinglyLinkedList:
         node = self.head
         while node:
             my_str += str(node.data)
-            my_str += '\n'
+            my_str += "\n"
             node = node.next_node
         return my_str[:-1]
 
