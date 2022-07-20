@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """No modules added"""
 
+
 class Square:
     """Represents a square.
     Private instance attribute: size:
