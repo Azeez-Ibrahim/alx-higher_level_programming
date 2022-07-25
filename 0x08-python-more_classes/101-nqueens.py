@@ -1,134 +1,127 @@
 #!/usr/bin/python3
- """Solves the N-queens puzzle.
- Determines all possible solutions to placing N
- N non-attacking queens on an NxN chessboard.
- Example:
-     $ ./101-nqueens.py N
- N must be an integer greater than or equal to 4.
- Attributes:
-     board (list): A list of lists representing the chessboard.
-     solutions (list): A list of lists containing solutions.
- Solutions are represented in the format [[r, c], [r, c], [r, c], [r, c]]
- where `r` and `c` represent the row and column, respectively, where a
- queen must be placed on the chessboard.
- """
- import sys
+import sys
 
 
- def init_board(n):
-     """Initialize an `n`x`n` sized chessboard with 0's."""
-     board = []
-     [board.append([]) for i in range(n)]
-     [row.append(' ') for i in range(n) for row in board]
-     return (board)
+def func_diagonal_sum(list_1, list_2):
+    for i in list_2:
+        if sum(list_1) == sum(i):
+            return 1
+    return 0
 
 
- def board_deepcopy(board):
-     """Return a deepcopy of a chessboard."""
-     if isinstance(board, list):
-         return list(map(board_deepcopy, board))
-     return (board)
+def func_row(list_1, list_2):
+    for i in list_2:
+        if list_1[0] == i[0]:
+            return 1
+    return 0
 
 
- def get_solution(board):
-     """Return the list of lists representation of a solved chessboard."""
-     solution = []
-     for r in range(len(board)):
-         for c in range(len(board)):
-             if board[r][c] == "Q":
-                 solution.append([r, c])
-                 break
-     return (solution)
+def func_col(list_1, list_2):
+    for i in list_2:
+        if list_1[1] == i[1]:
+            return 1
+    return 0
 
 
- def xout(board, row, col):
-     """X out spots on a chessboard.
-     All spots where non-attacking queens can no
-     longer be played are X-ed out.
-     Args:
-         board (list): The current working chessboard.
-         row (int): The row where a queen was last played.
-         col (int): The column where a queen was last played.
-     """
-     # X out all forward spots
-     for c in range(col + 1, len(board)):
-         board[row][c] = "x"
-     # X out all backwards spots
-     for c in range(col - 1, -1, -1):
-         board[row][c] = "x"
-     # X out all spots below
-     for r in range(row + 1, len(board)):
-         board[r][col] = "x"
-     # X out all spots above
-     for r in range(row - 1, -1, -1):
-         board[r][col] = "x"
-     # X out all spots diagonally down to the right
-     c = col + 1
-     for r in range(row + 1, len(board)):
-         if c >= len(board):
-             break
-         board[r][c] = "x"
-         c += 1
-     # X out all spots diagonally up to the left
-     c = col - 1
-     for r in range(row - 1, -1, -1):
-         if c < 0:
-             break
-         board[r][c]
-         c -= 1
-     # X out all spots diagonally up to the right
-     c = col + 1
-     for r in range(row - 1, -1, -1):
-         if c >= len(board):
-             break
-         board[r][c] = "x"
-         c += 1
-     # X out all spots diagonally down to the left
-     c = col - 1
-     for r in range(row + 1, len(board)):
-         if c < 0:
-             break
-         board[r][c] = "x"
-         c -= 1
+def func_diagonal_sub(list_1, list_2):
+    diff_1 = list_1[0] - list_1[1]
+    for i in list_2:
+        if diff_1 == (i[0] - i[1]):
+            return 1
+    return 0
 
 
- def recursive_solve(board, row, queens, solutions):
-     """Recursively solve an N-queens puzzle.
-     Args:
-         board (list): The current working chessboard.
-         row (int): The current working row.
-         queens (int): The current number of placed queens.
-         solutions (list): A list of lists of solutions.
-     Returns:
-         solutions
-     """
-     if queens == len(board):
-         solutions.append(get_solution(board))
-         return (solutions)
-
-     for c in range(len(board)):
-         if board[row][c] == " ":
-             tmp_board = board_deepcopy(board)
-             tmp_board[row][c] = "Q"
-             xout(tmp_board, row, c)
-             solutions = recursive_solve(tmp_board, row + 1,
-                                         queens + 1, solutions)
-
-     return (solutions)
+def check_list(my_list, num):
+    for index, temp in enumerate(my_list[::-1]):
+        if temp[1] != num - 1:
+            return index, temp
+    return 0
 
 
- if __name__ == "__main__":
-     if len(sys.argv) != 2:
-         print("Usage: nqueens N")
-         sys.exit(1)
-     if sys.argv[1].isdigit() is False:
-         print("N must be a number")
-         sys.exit(1)
-     if int(sys.argv[1]) < 4:
-         print("N must be at least 4")
-         sys.exit(1)
+if len(sys.argv) != 2:
+    print("Usage: nqueens N")
+    sys.exit(1)
 
-     board = init_board(int(sys.argv[1]))
-     solutions = recursive_solve(board, 0, 0, [])
-     for sol in solutions:
-         print(sol)
+for _c in sys.argv[1]:
+    _i = ord(_c)
+    if _i < 48 or _i > 57:
+        print("N must be a number")
+        sys.exit(1)
+_num = int(sys.argv[1])
+if _num < 4:
+    print("N must be at least 4")
+    sys.exit(1)
+all_list = []
+for i in range(_num):
+    temp_1 = []
+    for j in range(_num):
+        temp_2 = []
+        temp_2.append(i)
+        temp_2.append(j)
+        temp_1.append(temp_2)
+    all_list.append(temp_1)
+
+ctrl_1 = 0
+j = 0
+i = 1
+result_list = []
+result_list.append(all_list[j][ctrl_1])
+while ctrl_1 < len(all_list):
+    while j < len(all_list[ctrl_1]):
+        if False:
+            pass
+        else:
+            length_1 = len(result_list)
+            temp_4 = all_list[i][j]
+            if func_diagonal_sum(temp_4, result_list) == 1:
+                j += 1
+                if j == len(all_list[ctrl_1]):
+                    i += 1
+                    if i == len(all_list):
+                        break
+                    j = 0
+                continue
+            elif func_row(temp_4, result_list) == 1:
+                j += 1
+                if j == len(all_list[ctrl_1]):
+                    i += 1
+                    if i == len(all_list):
+                        break
+                    j = 0
+                continue
+            elif func_col(temp_4, result_list) == 1:
+                j += 1
+                if j == len(all_list[ctrl_1]):
+                    i += 1
+                    if i == len(all_list):
+                        break
+                    j = 0
+                continue
+            elif func_diagonal_sub(temp_4, result_list) == 1:
+                j += 1
+                if j == len(all_list[ctrl_1]):
+                    i += 1
+                    if i == len(all_list):
+                        break
+                    j = 0
+                continue
+            result_list.append(temp_4)
+            if len(result_list) == _num:
+                print(result_list)
+            i += 1
+            if i == len(all_list):
+                break
+            j = 0
+    if check_list(result_list[1:], _num) != 0:
+        ctrl_2, temp_1 = (check_list(result_list[1:], _num))
+        i = temp_1[0]
+        j = temp_1[1] + 1
+        result_list[-(ctrl_2 + 1):] = []
+    else:
+        ctrl_1 += 1
+        if ctrl_1 == len(all_list):
+            break
+        j = 0
+        i = 1
+        result_list = []
+        result_list.append(all_list[j][ctrl_1])
